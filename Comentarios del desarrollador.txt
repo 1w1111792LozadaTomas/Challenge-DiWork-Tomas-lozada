@@ -1,0 +1,8 @@
+Saludos!
+Este es un proyecto de taller mecánico hecho con tecnología Razor. El proyecto permite cargar automoviles y motocicletas, asignarles un presupuesto
+y a su vez cargar en el presupuesto múltiples detalles que a su vez pueden tener o no múltiples repuestos.
+El proyecto tiene mucho lugar para mejora, sobre todo en aspectos front-end como validaciones y aspectos visuales, pero por falta de tiempo
+no se pudieron perfeccionar.
+El proyecto cumple con todas las consignas solicitadas, la consigna 2 se puede ver desde la pestaña de reportes, finalmente la consiga 3 está como un
+archivo .SQL por separado, se llama massiveCharge.sql
+Desde ya gracias por considerarme para el puesto, espero podamos vernos pronto!

@@ -1,0 +1,194 @@
+﻿@model DesperfectoModel
+@{
+    ViewData["Title"] = "Agregar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Agregar Desperfecto
+    </div>
+    <div class="card-body">
+        <form asp-action="Agregar" asp-controller="Desperfecto" method="post">
+            <input type="hidden" asp-for="IdPresupuesto" value="@Model.IdPresupuesto" />
+            <input type="hidden" asp-for="Repuestos" id="hiddenRepuestos" name="Repuestos" />
+            <div class="mb-3">
+                <label class="form-label">Descripción</label>
+                <input class="form-control" type="text" asp-for="Descripcion" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Mano de Obra</label>
+                <input class="form-control" type="text" asp-for="ManoDeObra" />
+                <span asp-validation-for="ManoDeObra" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Tiempo(Días)</label>
+                <input class="form-control" type="text" asp-for="Tiempo" />
+                <span asp-validation-for="Tiempo" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label class="form-label" for="ddlComboRepuesto">Repuestos</label>
+                    <select id="ddlComboRepuesto" class="form-control">
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" id="cantidad" class="form-control" min="1" max="10" step="1">
+                </div>
+                <div class="col-2" style="margin-top:30px">
+                    <button type="button" id="btnAgregarRepuestos" class="btn btn-primary">Agregar</button>
+                </div>
+            </div>
+            <table id="tableRepuestos" class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table rows will be dynamically added here -->
+                </tbody>
+            </table>
+            <br />
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a asp-action="Listar" asp-controller="Desperfecto" asp-route-IdPresupuesto="@Model.IdPresupuesto" class="btn btn-warning">Volver</a>
+        </form>
+    </div>
+</div>
+
+@section scripts {
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.3/dist/sweetalert2.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.3/dist/sweetalert2.min.js"></script>
+    <script>
+        var repuestosArray = [];
+        var repuestosArrayTabla = [];
+        function llenaComboRepuestos() {
+            $.ajax({
+                url: '/Desperfecto/LlenaComboRepuestos',
+                type: 'GET',
+                success: function (response) {
+                    var dropdown = $('#ddlComboRepuesto');
+
+                    dropdown.empty();
+                    $.each(response, function (index, item) {
+                        dropdown.append($('<option></option>').val(item.idRepuesto).text(item.nombre + ":  $" + item.precio));
+                    });
+                },
+                error: function (xhr, status, error) {
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("btnAgregarRepuestos").addEventListener("click", function () {
+                var opcionSeleccionada = document.getElementById("ddlComboRepuesto").options[document.getElementById("ddlComboRepuesto").selectedIndex];
+
+                if (opcionSeleccionada) {
+                    var id = opcionSeleccionada.value;
+                    var nombrePrecio = opcionSeleccionada.innerHTML.trim();
+                    var nombre = nombrePrecio.split(":")[0].trim();
+                    var precio = nombrePrecio.split(":")[1].trim().replace("$", "");
+
+                    var numberValue = document.getElementById("cantidad").valueAsNumber;
+
+                    var duplicado = false;
+                    //guarda objetos de los repuestos para mostrarlos en la tablita
+                    for (var i = 0; i < repuestosArrayTabla.length; i++) {
+                        if (repuestosArrayTabla[i].id === id) {
+                            repuestosArrayTabla[i].cantidad += numberValue;
+                            duplicado = true;
+                            break;
+                        }
+                    }
+                    if (!duplicado) {
+                        var repuesto = {
+                            id: id,
+                            nombre: nombre,
+                            precio: precio,
+                            cantidad: numberValue
+                        };
+                        repuestosArrayTabla.push(repuesto);
+                    }
+
+                    //guarda todos los ids de los repuestos, para recorrer este array en la base e insertar los repuestos con su desperfecto
+                    var repuestoId = {
+                        id: id
+                    };
+                    for (var i = 0; i < numberValue; i++) {
+                        repuestosArray.push(repuestoId);
+                    }
+                    var tableBody = document.getElementById("tableRepuestos").getElementsByTagName("tbody")[0];
+
+                    tableBody.innerHTML = "";
+
+                    for (var i = 0; i < repuestosArrayTabla.length; i++) {
+                        var newRow = tableBody.insertRow();
+                        var nombreCell = newRow.insertCell();
+                        var precioCell = newRow.insertCell();
+                        var cantidadCell = newRow.insertCell();
+                        nombreCell.innerHTML = repuestosArrayTabla[i].nombre;
+                        precioCell.innerHTML = "$" + repuestosArrayTabla[i].precio;
+                        cantidadCell.innerHTML = "x" + repuestosArrayTabla[i].cantidad;
+                    }
+
+                    var stringRepuestos = repuestosArray.map(function (repuesto) {
+                        return repuesto.id
+                    }).join(",");
+                    document.getElementById("hiddenRepuestos").value = stringRepuestos;
+                    console.log(document.getElementById("hiddenRepuestos").value);
+                }
+            });
+        });
+
+        $(document).ready(function () {
+
+            llenaComboRepuestos();
+            $('.selectpicker').selectpicker();
+
+            $('form').submit(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        console.log(response);
+                        if (response === '') {
+                            Swal.fire({
+                                title: '¡Correcto!',
+                                text: 'El desperfecto se ha guardado correctamente',
+                                icon: 'success'
+                            }).then(function () {
+                                window.location.href = '/Desperfecto/Listar?idPresupuesto=' + @Model.IdPresupuesto;
+                            });
+                        } else {
+                            Swal.fire({
+                                title: '¡Error!',
+                                text: 'Ha ocurrido un error al guardar el desperfecto: ' + response,
+                                icon: 'error'
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire({
+                            title: '¡Oops!',
+                            text: 'Ha ocurrido un error',
+                            icon: 'error'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

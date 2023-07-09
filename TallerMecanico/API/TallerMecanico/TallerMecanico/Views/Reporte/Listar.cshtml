@@ -1,0 +1,254 @@
+﻿@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Reportes</h1>
+
+<div class="button-container">
+    <div class="button-row">
+        <button class="btn btn-danger" onclick="emitirReporte1()">Reporte 1</button>
+        <button class="btn btn-primary" onclick="emitirReporte2()">Reporte 2</button>
+        <button class="btn btn-warning" onclick="emitirReporte3()">Reporte 3</button>
+    </div>
+</div>
+
+<div id="divRpt1">
+    <div id="rpt1Chart"></div>
+</div>
+
+<div class="chart-container" id="divRpt2">
+    <canvas id="rpt2Chart"></canvas>
+</div>
+
+<div class="chart-container" id="divRpt3">
+    <canvas id="rpt3Chart"></canvas>
+</div>
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var rpt2Chart = null;
+        var rpt3Chart = null;
+        function emitirReporte2() {
+            $.ajax({
+                url: '/Reporte/Reporte2',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var result = [];
+
+                    $.each(data, function (index, entry) {
+                        var item = {
+                            marca: entry.marca,
+                            promedio: entry.promedio
+                        };
+
+                        result.push(item);
+                    });
+
+                    crearReporte2Chart(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function crearReporte2Chart(data) {
+            $('#divRpt1').hide();
+            $('#divRpt2').show();
+            $('#divRpt3').hide();
+            if (rpt2Chart) {
+                rpt2Chart.destroy();
+            }
+            var ctx = document.getElementById('rpt2Chart').getContext('2d');
+            var labels = data.map(function (entry) {
+                return entry.marca;
+            });
+            var values = data.map(function (entry) {
+                return entry.promedio;
+            });
+
+            rpt2Chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Promedio',
+                        data: values,
+                        backgroundColor: 'blue'
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                        }
+                    }
+                }
+            });
+        }
+
+        function emitirReporte3() {
+            $.ajax({
+                url: '/Reporte/Reporte3',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var result = [];
+                    $.each(data, function (index, entry) {
+                        var item = {
+                            tipo: entry.tipo,
+                            sumatoriaPresupuesto: entry.sumatoriaPresupuesto
+                        };
+
+                        result.push(item);
+                    });
+
+                    crearReporte3Chart(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function crearReporte3Chart(data) {
+            $('#divRpt1').hide();
+            $('#divRpt2').hide();
+            $('#divRpt3').show();
+
+            if (rpt3Chart) {
+                rpt3Chart.destroy();
+            }
+            var ctx = document.getElementById('rpt3Chart').getContext('2d');
+            var labels = data.map(function (entry) {
+                return entry.tipo;
+            });
+            var values = data.map(function (entry) {
+                return entry.sumatoriaPresupuesto;
+            });
+
+            rpt3Chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Sumatoria Presupuesto',
+                        data: values,
+                        backgroundColor: 'yellow'
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            left: 50,
+                            right: 50,
+                            top: 50,
+                            bottom: 50
+                        }
+                    }
+                }
+            });
+        }
+
+
+        function emitirReporte1() {
+            $.ajax({
+                url: '/Reporte/Reporte1',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var result = [];
+                    $.each(data, function (index, entry) {
+                        var item = {
+                            marca: entry.marca,
+                            nombre: entry.nombre,
+                            precio: entry.precio,
+                            cantidad: entry.cantidad
+                        };
+
+                        result.push(item);
+                    });
+
+                    crearReporte1Tabla(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function crearReporte1Tabla(data) {
+            // Clear the previous table
+            $('#rpt1Chart').empty();
+            $('#divRpt1').show();
+            $('#divRpt2').hide();
+            $('#divRpt3').hide();
+
+            // Create the table element
+            var table = $('<table></table>').addClass('table');
+
+            // Create the table headers
+            var thead = $('<thead></thead>');
+            var headerRow = $('<tr></tr>');
+            headerRow.append($('<th></th>').text('Marca'));
+            headerRow.append($('<th></th>').text('Nombre'));
+            headerRow.append($('<th></th>').text('Precio'));
+            headerRow.append($('<th></th>').text('Cantidad'));
+            thead.append(headerRow);
+            table.append(thead);
+
+            // Create the table body
+            var tbody = $('<tbody></tbody>');
+            $.each(data, function (index, entry) {
+                var row = $('<tr></tr>');
+                row.append($('<td></td>').text(entry.marca));
+                row.append($('<td></td>').text(entry.nombre));
+                row.append($('<td></td>').text(entry.precio));
+                row.append($('<td></td>').text(entry.cantidad));
+                tbody.append(row);
+            });
+            table.append(tbody);
+
+            // Append the table to the container
+            $('#rpt1Chart').append(table);
+        }
+    </script>
+    <style>
+        .table-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #reportButtonsContainer {
+            margin-top: 20px;
+        }
+
+        .reportButton {
+            margin-right: 10px;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button-container button {
+            margin: 5px;
+        }
+    </style>
+}

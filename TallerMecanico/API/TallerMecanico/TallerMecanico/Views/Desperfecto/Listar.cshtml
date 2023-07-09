@@ -1,0 +1,41 @@
+﻿@model List<DesperfectoModel>
+
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Lista de Desperfectos
+    </div>
+    <div class="card-body">
+        <a asp-action="Agregar" asp-controller="Desperfecto" class="btn btn-success btn-sm" asp-route-IdPresupuesto="@Model[0].IdPresupuesto">Agregar Nuevo</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                    <th>Mano de Obra</th>
+                    <th>Tiempo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 1; i < Model.Count; i++)
+                {
+                    var item = Model[i];
+                    <tr>
+                        <td>@item.Descripcion</td>
+                        <td>@item.ManoDeObra</td>
+                        <td>@item.Tiempo</td>
+                        <td>
+                            <a asp-action="ListarDetalle" asp-controller="Desperfecto" class="btn btn-primary btn-sm" asp-route-IdDesperfecto="@item.IdDesperfecto">Ver Detalle</a>
+@*                            <a asp-action="Eliminar" asp-controller="Desperfecto" class="btn btn-danger btn-sm" asp-route-IdDesperfecto="@item.IdDesperfecto">Eliminar</a>*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a asp-action="Listar" asp-controller="Presupuesto" class="btn btn-warning btn-sm">Volver</a>
+    </div>
+</div>

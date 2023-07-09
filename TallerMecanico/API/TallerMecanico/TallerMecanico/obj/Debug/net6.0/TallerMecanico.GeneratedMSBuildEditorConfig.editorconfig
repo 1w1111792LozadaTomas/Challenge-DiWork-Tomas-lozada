@@ -1,0 +1,113 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = TallerMecanico
+build_property.RootNamespace = TallerMecanico
+build_property.ProjectDir = C:\Users\tomas\OneDrive\Escritorio\TallerMecanico\API\TallerMecanico\TallerMecanico\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
+build_property.MSBuildProjectDirectory = C:\Users\tomas\OneDrive\Escritorio\TallerMecanico\API\TallerMecanico\TallerMecanico
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Automovil/Agregar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b21vdmlsXEFncmVnYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Automovil/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b21vdmlsXEVkaXRhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Automovil/Eliminar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b21vdmlsXEVsaW1pbmFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Automovil/Listar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b21vdmlsXExpc3Rhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Desperfecto/Agregar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzcGVyZmVjdG9cQWdyZWdhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Desperfecto/Eliminar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzcGVyZmVjdG9cRWxpbWluYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Desperfecto/Listar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzcGVyZmVjdG9cTGlzdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Desperfecto/ListarDetalle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzcGVyZmVjdG9cTGlzdGFyRGV0YWxsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Motocicleta/Agregar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW90b2NpY2xldGFcQWdyZWdhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Motocicleta/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW90b2NpY2xldGFcRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Motocicleta/Eliminar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW90b2NpY2xldGFcRWxpbWluYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Motocicleta/Listar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW90b2NpY2xldGFcTGlzdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Presupuesto/Agregar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlc3VwdWVzdG9cQWdyZWdhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Presupuesto/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlc3VwdWVzdG9cRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Presupuesto/Eliminar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlc3VwdWVzdG9cRWxpbWluYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Presupuesto/Listar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlc3VwdWVzdG9cTGlzdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Reporte/Listar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZVxMaXN0YXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomas/OneDrive/Escritorio/TallerMecanico/API/TallerMecanico/TallerMecanico/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-jetkcb0rrn

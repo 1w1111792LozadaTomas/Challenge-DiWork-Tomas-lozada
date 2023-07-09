@@ -1,0 +1,93 @@
+﻿@using TallerMecanico.Models
+@model MotocicletaModel
+@{
+    ViewData["Title"] = "Agregar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Agregar Motocicleta
+    </div>
+    <div class="card-body">
+        <form id="agregarForm" asp-action="Agregar" asp-controller="Motocicleta" method="post">
+            <div class="mb-3">
+                <label class="form-label">Marca</label>
+                <input asp-for="Marca" type="text" class="form-control" />
+                <span asp-validation-for="Marca" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Modelo</label>
+                <input asp-for="Modelo" type="text" class="form-control" />
+                <span asp-validation-for="Modelo" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Año</label>
+                <input asp-for="Anio" type="text" class="form-control" />
+                <span asp-validation-for="Anio" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Patente</label>
+                <input asp-for="Patente" type="text" class="form-control" />
+                <span asp-validation-for="Patente" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Cilindrada</label>
+                <input asp-for="Cilindrada" type="text" class="form-control" />
+                <span asp-validation-for="Cilindrada" class="text-danger"></span>
+            </div>
+            <button id="guardarBtn" type="submit" class="btn btn-primary">Guardar</button>
+            <a id="btn-volver" asp-action="Listar" asp-controller="Motocicleta" class="btn btn-warning">Volver</a>
+        </form>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#agregarForm').submit(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        console.log(response);
+                        if (response === '') {
+                            Swal.fire({
+                                title: '¡Correcto!',
+                                text: 'Se ha añadido la motocicleta',
+                                icon: 'success'
+                            }).then(function () {
+                                // Redirect to the previous view
+                                window.location.href = '/Motocicleta/Listar';
+                            });
+                        } else if (response === 'datos') {
+                            Swal.fire({
+                                title: '¡Cuidado!',
+                                text: 'Los datos ingresados no son correctos. Verifique',
+                                icon: 'warning'
+                            });
+                        } else {
+                            Swal.fire({
+                                title: '¡Error!',
+                                text: 'Ha ocurrido un error al agregar la motocicleta: ' + response,
+                                icon: 'error'
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire({
+                            title: '¡Oops!',
+                            text: 'Ha ocurrido un error',
+                            icon: 'error'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

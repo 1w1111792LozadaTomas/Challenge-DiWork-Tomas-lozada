@@ -1,0 +1,50 @@
+﻿@model List<MotocicletaModel>
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Lista de Motocicletas
+    </div>
+    <div class="card-body">
+        <a asp-action="Agregar" asp-controller="Motocicleta" class="btn btn-success btn-sm">Agregar Nuevo</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Año</th>
+                    <th>Patente</th>
+                    <th>Cilindrada</th>
+                    <th>Fecha de Baja</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="@(item.FechaBaja.HasValue ? "background-color: lightcoral;" : "")">
+                        <td>@item.Marca</td>
+                        <td>@item.Modelo</td>
+                        <td>@item.Anio</td>
+                        <td>@item.Patente</td>
+                        <td>@item.Cilindrada</td>
+                        <td>@item.FechaBaja?.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            @if (!item.FechaBaja.HasValue)
+                            {
+                                <a asp-action="Editar" asp-controller="Motocicleta" class="btn btn-success btn-sm" asp-route-IdMotocicleta="@item.IdMotocicleta">Editar</a>
+                            }
+                            @if (!item.FechaBaja.HasValue)
+                            {
+                                <a asp-action="Eliminar" asp-controller="Motocicleta" class="btn btn-danger btn-sm" asp-route-IdMotocicleta="@item.IdMotocicleta">Eliminar</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

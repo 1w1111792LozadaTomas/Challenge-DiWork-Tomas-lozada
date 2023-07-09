@@ -1,0 +1,122 @@
+﻿@model PresupuestoModel
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Editar Presupuesto
+    </div>
+    <div class="card-body">
+        <form id="editarForm" asp-action="Editar" asp-controller="Presupuesto" method="post">
+            <input asp-for="IdPresupuesto" type="hidden" class="form-control" />
+            <input asp-for="Total" type="hidden" value="0" class="form-control" />
+            <input asp-for="IdVehiculo" type="hidden" value="@Model.IdVehiculo" class="form-control" />
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input asp-for="Nombre" type="text" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Apellido</label>
+                <input asp-for="Apellido" type="text" class="form-control" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input asp-for="Email" type="email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Vehículo</label>
+                <select id="ddlComboVehiculos" class="form-control" disabled>
+                </select>
+            </div>
+            <br />
+            <button id="guardarBtn" type="submit" class="btn btn-primary">Guardar</button>
+            <a id="btn-volver" asp-action="Listar" asp-controller="Presupuesto" class="btn btn-warning">Volver</a>
+        </form>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#editarForm').submit(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        console.log(response);
+                        if (response === '') {
+                            Swal.fire({
+                                title: '¡Correcto!',
+                                text: 'Se han guardado los cambios',
+                                icon: 'success'
+                            }).then(function () {
+                                // Redirect to the previous view
+                                window.location.href = '/Presupuesto/Listar';
+                            });
+                        } else if (response === 'datos') {
+                            Swal.fire({
+                                title: '¡Cuidado!',
+                                text: 'Los datos ingresados no son correctos. Verifique',
+                                icon: 'warning'
+                            });
+                        } else {
+                            LlenaComboVehiculosEditar
+                            Swal.fire({
+                                title: '¡Error!',
+                                text: 'Ha ocurrido un error al guardar los cambios: ' + response,
+                                icon: 'error'
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire({
+                            title: '¡Oops!',
+                            text: 'Ha ocurrido un error',
+                            icon: 'error'
+                        });
+                    }
+                });
+            });
+        });
+
+        function llenaComboVehiculos(idVehiculo) {
+            $.ajax({
+                url: '/Presupuesto/LlenaComboVehiculosEditar',
+                type: 'GET',
+                data: idVehiculo,
+                success: function (response) {
+                    var dropdown = $('#ddlComboVehiculos');
+
+                    dropdown.empty();
+                    console.log(response)
+                    dropdown.append($('<option value="0">Seleccione un vehículo</option>'));
+                    $.each(response, function (index, item) {
+                        var option = $('<option></option>').val(item.idVehiculo).text("Marca: " + item.marca + " | Modelo: " + item.modelo + " | Año: " + item.anio + " | Patente: " + item.patente);
+                        console.log( @Model.IdVehiculo)
+                        if (item.idVehiculo == @Model.IdVehiculo) {
+                            option.attr('selected', 'selected');
+                        }
+                        dropdown.append(option);
+                    });
+
+                },
+                error: function (xhr, status, error) {
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            llenaComboVehiculos();
+        });
+    </script>
+}
